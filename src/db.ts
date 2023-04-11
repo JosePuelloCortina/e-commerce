@@ -1,5 +1,8 @@
 import { DataSource } from "typeorm";
 import { User } from "./entities/User";
+import { Role } from "./entities/Role";
+import { Profile } from "./entities/Profile";
+import { Address } from "./entities/Address";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -10,7 +13,8 @@ export const AppDataSource = new DataSource({
     database: "ecommerce",
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, Role, Profile, Address],
     // subscribers: [],
-    // migrations: [],
+    // migrations: [/*...*/],
+    // migrationsTableName: "custom_migration_table",
 })
