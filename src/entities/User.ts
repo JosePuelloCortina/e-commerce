@@ -5,9 +5,8 @@ import {
     UpdateDateColumn, 
     PrimaryGeneratedColumn,
     BaseEntity,
-    OneToOne,
+    ManyToOne,
     OneToMany,
-    JoinColumn,
 } from 'typeorm';
 
 import { Role } from './Role';
@@ -18,23 +17,35 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     name: string
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     last_name: string
 
-    @Column()
+    @Column({
+        nullable: false,
+        unique: true
+    })
     email: string
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     password: string
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     phone: string
 
     @Column({
-        default: true
+        default: true,
+        nullable: false
     })
     active: boolean
 
@@ -44,15 +55,12 @@ export class User extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToMany(() => Role, (role) => role)
-    @JoinColumn()
-    role: Role[]
+    @ManyToOne(() => Role, (role) => role.users)
+    role: Role
 
-    @OneToMany(() => Profile, (profile) => profile)
-    @JoinColumn()
-    profile: Profile[]
+    @OneToMany(() => Profile, (profile) => profile.user, {cascade: true})
+    profiles: Profile[]
 
-    @OneToMany( () => Address, (address) => address)
-    @JoinColumn()
+    @OneToMany(() => Address, (address) => address.user, {cascade: true})
     address: Address[]
 }
