@@ -6,12 +6,17 @@ import {
     getUsers,
     updateUser
 } from "../controllers/user.controllers";
+
+import { loginHandler, profileHandler } from "../controllers/auth.controller";
+import { requireAuth } from "../middlewares/requireAuth";
 const router = Router()
 
-router.get("/users", getUsers)
-router.post("/users", createUser)
-router.put("/users/:id", updateUser)
-router.delete("/users/:id", deleteUser)
-router.get("/users/:id", getUser)
+router.post('/login', loginHandler)
+
+router.get("/users", requireAuth, getUsers)
+router.post("/users", requireAuth, createUser)
+router.put("/users/:id", requireAuth, updateUser)
+router.delete("/users/:id", requireAuth, deleteUser)
+router.get("/users/:id", requireAuth, getUser)
 
 export default router; 
