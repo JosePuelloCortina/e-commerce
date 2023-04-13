@@ -3,17 +3,19 @@ import bcrypt  from "bcryptjs";
 
 import { AppDataSource } from "../../db";
 import { User } from "../../entities/User";
+import { body, validationResult } from "express-validator";
 
 export const createUser = async(req: Request, res: Response) => {
     try {
         const { name, last_name, email, phone, password, role, address, profiles} = req.body;    
-
         if(!name || !last_name || !email || !phone || !password || !role || !address || !profiles){
             return res.status(400).json({error: "Bad request, missing data"})
         }
         const userBody = await User.findOne({
             where: { email: req.body.email}
         })
+        if(password.length < 5){ return res.status(400).json({ message: "incomplete password" });}
+        
         const hashPassword = await bcrypt.hash(password, 10);
         if(!userBody){
             const userRepository = AppDataSource.getRepository(User);
@@ -31,7 +33,6 @@ export const createUser = async(req: Request, res: Response) => {
         }else{
             return res.status(500).json({error: "Ya existe un usuario con este correo"})
         }
-        
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({ message: error.message})
