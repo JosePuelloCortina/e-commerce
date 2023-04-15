@@ -4,9 +4,14 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     BaseEntity,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    ManyToMany,
+    OneToMany
 
 } from "typeorm";
+import { Order } from "../orders/Order";
+import { Category } from "./Category";
+import { Detail } from "./Detail";
 
 @Entity()
 export class Product extends BaseEntity{
@@ -41,4 +46,19 @@ export class Product extends BaseEntity{
 
     @Column()
     available: boolean
+
+    @CreateDateColumn()
+    created_at: Date
+
+    @UpdateDateColumn()
+    updated_at: Date
+
+    @ManyToMany(() => Order, order => order.products)
+    orders: Order[]
+
+    @OneToMany( () => Category, category => category.products)
+    categories: Category[]
+
+    @OneToMany( () => Detail, detail => detail.products)
+    details: Detail[]
 }

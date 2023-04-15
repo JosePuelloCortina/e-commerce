@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt  from "bcryptjs";
 
 import { AppDataSource } from "../../db";
-import { User } from "../../entities/User";
+import { User } from "../../entities/users/User";
 import { validatePassword, validateEmail, isArrayofStrings } from "./Validator";
 
 export const createUser = async(req: Request, res: Response) => { 

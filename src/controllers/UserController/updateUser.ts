@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "../../entities/User";
+import { User } from "../../entities/users/User";
 import bcrypt  from "bcryptjs";
 import { AppDataSource } from "../../db";
 

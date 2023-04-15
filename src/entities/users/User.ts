@@ -12,6 +12,7 @@ import {
 import { Role } from './Role';
 import { Profile } from './Profile';
 import { Address } from './Address';
+import { Order } from '../orders/Order';
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -63,4 +64,7 @@ export class User extends BaseEntity {
 
     @OneToMany(() => Address, (address) => address.user, {cascade: true})
     address: Address[]
+
+    @ManyToOne(() => Order, order => order.user)
+    orders: Order[]
 }
