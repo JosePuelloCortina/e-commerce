@@ -9,6 +9,10 @@ const roles = [
     {
         "id": 2,
         "role": "buyer"
+    },
+    {
+        "id": 3,
+        "role": "supplier"
     }
 ]
  

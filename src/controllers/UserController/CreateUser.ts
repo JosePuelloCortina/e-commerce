@@ -3,10 +3,10 @@ import bcrypt  from "bcryptjs";
 
 import { AppDataSource } from "../../db";
 import { User } from "../../entities/User";
-import { body, validationResult } from "express-validator";
+import { validatePassword, validateEmail, isArrayofStrings } from "./Validator";
 
-export const createUser = async(req: Request, res: Response) => {
-    try {
+export const createUser = async(req: Request, res: Response) => { 
+    try { 
         const { name, last_name, email, phone, password, role, address, profiles} = req.body;    
         if(!name || !last_name || !email || !phone || !password || !role || !address || !profiles){
             return res.status(400).json({error: "Bad request, missing data"})
@@ -14,8 +14,12 @@ export const createUser = async(req: Request, res: Response) => {
         const userBody = await User.findOne({
             where: { email: req.body.email}
         })
-        if(password.length < 5){ return res.status(400).json({ message: "incomplete password" });}
-        
+        if(!validateEmail(email)) {
+            return res.status(400).json({ message: "Email is not valid" });
+        }
+        if(!validatePassword(password)) {
+            return res.status(400).json({ message: "Password is not valid" });
+        }
         const hashPassword = await bcrypt.hash(password, 10);
         if(!userBody){
             const userRepository = AppDataSource.getRepository(User);

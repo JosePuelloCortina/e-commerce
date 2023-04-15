@@ -1,12 +1,20 @@
 import { Request, Response } from "express";
 import { User } from "../../entities/User";
 import bcrypt  from "bcryptjs";
+import { AppDataSource } from "../../db";
 
 export const updateUser = async (req: Request, res: Response) =>{
     try {
         const { id } = req.params
         const { name, last_name, phone, password, role, address, profiles} = req.body;   
-        const user = await User.findOneBy({id: parseInt(id)})
+        const user = await User.findOne({
+            where:{id: parseInt(id)},
+            relations:[
+                'role',
+                'address',
+                'profiles'
+            ]
+        });
         if(!user) return res.status(404).json({ message: "User not found"})
         if(password.length < 5){ return res.status(400).json({ message: "incomplete password" })}
         const hashPassword = await bcrypt.hash(password, 10);
@@ -18,6 +26,8 @@ export const updateUser = async (req: Request, res: Response) =>{
         user.address = address;
         user.profiles = profiles;
         await user.save()
+        await AppDataSource.manager.query('DELETE FROM profile WHERE userId IS NULL')
+        await AppDataSource.manager.query('DELETE FROM address WHERE userId IS NULL')
         return res.sendStatus(200);        
     } catch (error) {
         if(error instanceof Error){

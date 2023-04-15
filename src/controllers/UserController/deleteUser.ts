@@ -1,16 +1,26 @@
 import { Request, Response } from "express";
 import { User } from "../../entities/User";
+import { AppDataSource } from "../../db";
+import { Profile } from "../../entities/Profile";
+import { Address } from "../../entities/Address";
 
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const DeleteUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const result = await User.delete({ id: parseInt(id)});
-        if (result.affected === 0) {
+        const userRepository = AppDataSource.getRepository(User)
+        const userExists = await userRepository.findOne({
+            where:{id: parseInt(id)},
+            relations:['role', 'address', 'profiles']
+        });
+        if (!userExists) {
+            console.log(" entra")
             return res.status(404).json({ message: "User not found"})
         }
-        return res.sendStatus(200);
-        
+        await AppDataSource.getRepository(Profile).remove(userExists.profiles)
+        await AppDataSource.getRepository(Address).remove(userExists.address)
+        await userRepository.remove(userExists)       
+        return res.status(200).json(userRepository);
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({message: error.message})

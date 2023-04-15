@@ -3,7 +3,7 @@ import { Router } from "express";
 import { allUsers } from "../controllers/UserController/AllUsers";
 import { createUser } from "../controllers/UserController/CreateUser";
 import { updateUser } from "../controllers/UserController/updateUser";
-import { deleteUser } from "../controllers/UserController/deleteUser";
+import { DeleteUser } from "../controllers/UserController/DeleteUser";
 import { getUser } from "../controllers/UserController/getUser";
 
 import { loginHandler, profileHandler } from "../controllers/auth.controller";
@@ -15,7 +15,7 @@ router.post('/login', loginHandler)
 router.get("/users", requireAuth, allUsers)
 router.post("/users", requireAuth, createUser)
 router.put("/users/:id", requireAuth, updateUser)
-router.delete("/users/:id", requireAuth, deleteUser)
+router.delete("/users/:id", requireAuth, DeleteUser)
 router.get("/users/:id", requireAuth, getUser)
 
 export default router; 

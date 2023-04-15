@@ -5,7 +5,10 @@ import { User } from "../../entities/User";
 export const getUser = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const user = await User.findOneBy({id: parseInt(id)})
+        const user = await User.findOne({
+            where: {id: parseInt(id)},
+            relations: ['role','profiles', 'address']
+        },)
         return  res.json(user)        
     } catch (error) {
         if(error instanceof Error){

@@ -1,3 +1,6 @@
 node_modules
 dist
 package-lock.json
+
+diagrama-E-R.jpg
+ER+MRDB.drawio.png
