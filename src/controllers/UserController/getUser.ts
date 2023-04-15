@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../../entities/users/User";
 
 
-export const getUser = async(req: Request, res: Response) => {
+export const GetUser = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const user = await User.findOne({

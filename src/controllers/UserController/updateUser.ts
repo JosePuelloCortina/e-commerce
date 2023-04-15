@@ -3,7 +3,7 @@ import { User } from "../../entities/users/User";
 import bcrypt  from "bcryptjs";
 import { AppDataSource } from "../../db";
 
-export const updateUser = async (req: Request, res: Response) =>{
+export const UpdateUser = async (req: Request, res: Response) =>{
     try {
         const { id } = req.params
         const { name, last_name, phone, password, role, address, profiles} = req.body;   
