@@ -3,6 +3,7 @@ import { User } from "./entities/User";
 import { Role } from "./entities/Role";
 import { Profile } from "./entities/Profile";
 import { Address } from "./entities/Address";
+import { Product } from "./entities/Product";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
     database: "ecommerce",
     synchronize: true,
     logging: true,
-    entities: [User, Role, Profile, Address],
+    entities: [User, Role, Profile, Address, Product],
     // subscribers: [],
     // migrations: [/*...*/],
     // migrationsTableName: "custom_migration_table",
