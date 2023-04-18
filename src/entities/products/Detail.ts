@@ -17,7 +17,7 @@ export class Detail extends BaseEntity{
     @Column({
         nullable: false
     })
-    images: string[];
+    images: string;
 
     @Column({
         nullable: false

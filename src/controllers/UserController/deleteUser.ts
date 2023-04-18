@@ -5,7 +5,7 @@ import { Profile } from "../../entities/users/Profile";
 import { Address } from "../../entities/users/Address";
 
 
-export const DeleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const userRepository = AppDataSource.getRepository(User)

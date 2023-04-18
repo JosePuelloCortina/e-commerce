@@ -5,7 +5,7 @@ import { AppDataSource } from "../../db";
 import { User } from "../../entities/users/User";
 import { validatePassword, validateEmail } from "./Validator";
 
-export const CreateUser = async(req: Request, res: Response) => { 
+export const createUser = async(req: Request, res: Response) => { 
     try { 
         const { name, last_name, email, phone, password, role, address, profiles} = req.body;    
         if(!name || !last_name || !email || !phone || !password || !role || !address || !profiles){

@@ -19,6 +19,12 @@ export class Product extends BaseEntity{
     id: number
 
     @Column({
+        nullable: false,
+        unique: true
+    })
+    code: number
+
+    @Column({
         nullable: false
     })
     name: string
@@ -37,14 +43,12 @@ export class Product extends BaseEntity{
     @Column({
         nullable: false
     })
-    warranty: string
-
-    @Column({
-        nullable: false
-    })
     stock: number
 
-    @Column()
+    @Column({
+        default: true,
+        nullable: false
+    })
     available: boolean
 
     @CreateDateColumn()
@@ -53,12 +57,12 @@ export class Product extends BaseEntity{
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToMany(() => Order, order => order.products)
+    @ManyToMany(() => Order, order => order.products, {cascade: true})
     orders: Order[]
 
-    @OneToMany( () => Category, category => category.products)
+    @OneToMany( () => Category, category => category.products, {cascade: true})
     categories: Category[]
 
-    @OneToMany( () => Detail, detail => detail.products)
+    @OneToMany( () => Detail, detail => detail.products, {cascade: true})
     details: Detail[]
 }

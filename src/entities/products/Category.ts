@@ -17,8 +17,13 @@ export class Category extends BaseEntity {
     @Column()
     type: string
 
+    @Column({
+        nullable: false
+    })
+    applications: string 
+
     @Column()
-    description: string
+    public: string
 
     @CreateDateColumn()
     created_at: Date
