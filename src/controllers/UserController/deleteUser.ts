@@ -14,7 +14,6 @@ export const deleteUser = async (req: Request, res: Response) => {
             relations:['role', 'address', 'profiles']
         });
         if (!userExists) {
-            console.log(" entra")
             return res.status(404).json({ message: "User not found"})
         }
         await AppDataSource.getRepository(Profile).remove(userExists.profiles)
