@@ -57,7 +57,7 @@ export class Product extends BaseEntity{
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToMany(() => Order, order => order.products, {cascade: true})
+    @ManyToMany(() => Order, order => order.products)
     orders: Order[]
 
     @OneToMany( () => Category, category => category.products, {cascade: true})

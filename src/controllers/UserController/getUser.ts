@@ -7,7 +7,7 @@ export const getUser = async(req: Request, res: Response) => {
         const { id } = req.params;
         const user = await User.findOne({
             where: {id: parseInt(id)},
-            relations: ['role','profiles', 'address']
+            relations: ['role','profiles', 'address', 'orders']
         },)
         return  res.json(user)        
     } catch (error) {

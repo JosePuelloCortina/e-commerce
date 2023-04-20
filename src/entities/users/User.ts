@@ -65,6 +65,6 @@ export class User extends BaseEntity {
     @OneToMany(() => Address, (address) => address.user, {cascade: true})
     address: Address[]
 
-    @ManyToOne(() => Order, order => order.user)
+    @OneToMany(() => Order, (order) => order.user, {cascade:true})
     orders: Order[]
 }

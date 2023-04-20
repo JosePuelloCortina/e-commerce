@@ -5,7 +5,7 @@ import { User } from "../../entities/users/User";
 export const allUsers = async(req: Request, res: Response) => {
     try {
         const users = await AppDataSource.getRepository(User).find({
-            relations:['role', 'address', 'profiles'],
+            relations:['role', 'address', 'profiles', 'orders'],
         })   
         if(!users.length){
             return res.status(200).json({message:"No se encontraron usuarios"})

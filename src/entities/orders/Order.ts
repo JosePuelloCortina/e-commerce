@@ -8,12 +8,14 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
-    OneToOne
-
+    BeforeInsert,
+    OneToMany
 } from "typeorm";
 import { User } from "../users/User";
 import { Product } from "../products/Product";
 import { Payment } from "../payments/Payment";
+
+
 
 @Entity()
 export class Order extends BaseEntity {
@@ -21,19 +23,20 @@ export class Order extends BaseEntity {
     id: number
 
     @Column({
-        nullable: false
+        nullable: false,
+        unique: true
     })
-    order_number: number
+    order_number: string
+
+    generateOrderNumber() {
+        let randomNumber = Math.floor(Math.random() * 10000000000);
+        this.order_number = randomNumber.toString().padStart(10, '0');
+      }
 
     @Column({
         nullable: false
     })
     quantity: number
-
-    @Column({
-        nullable: false
-    })
-    shipping_info: string
 
     @Column()
     total_amount: number
@@ -44,13 +47,13 @@ export class Order extends BaseEntity {
     @CreateDateColumn()
     created_at: Date
 
-    @UpdateDateColumn()
+    @UpdateDateColumn() 
     updated_at: Date
 
-    @ManyToOne(() => User, user => user.orders)
+    @ManyToOne(() => User, user => user.orders) 
     user: User
 
-    @ManyToMany(() => Product)
+    @ManyToMany(() => Product, product => product.orders, {cascade: true})
     @JoinTable()
     products: Product[]
 
