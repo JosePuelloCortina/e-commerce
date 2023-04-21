@@ -36,7 +36,7 @@ router.delete("/users/:id", requireAuth, deleteUser)
 router.get("/products/", requireAuth, allProducts)
 router.get("/products/search", requireAuth, getProductByName)
 router.get("/products/:id", requireAuth, getProduct)
-router.post("/products/", requireAuth, createProduct) 
+router.post("/products/:userId", requireAuth, createProduct) 
 router.put("/products/:id", requireAuth, updateProduct)
 router.delete("/products/:id", requireAuth, deleteProduct)
 

@@ -1,12 +1,22 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../../db";
 import { Product } from "../../entities/products/Product";
+import { User } from "../../entities/users/User";
 
 export const createProduct = async(req: Request, res: Response) => {
-    try {        
+    try {
+        const { userId } = req.params
         const {code, name, description, unit_price, stock, details, categories } = req.body
         if(!code || !name || !description || !unit_price || !stock || !details || !categories){
             return res.status(400).json({message: "Bad request, missing data"})
+        }
+        const userPermissions = await User.findOne({
+            where: { id: parseInt(userId)},
+            relations: ['role']
+        })
+        if(!userPermissions){return res.status(404).json({message: "user not found"})}
+        if(userPermissions.role.role === 'buyer' ){
+            return res.status(401).json({message: "Not authorized"})
         }
         const uniqueProduct = await AppDataSource.getRepository(Product).findOne({
             where: { code: req.body.code}
