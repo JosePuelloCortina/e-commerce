@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../../db";
 import { Order } from "../../entities/orders/Order";
-import { Product } from "../../entities/products/Product";
 import { User } from "../../entities/users/User";
 
 export const createOrder = async(req: Request, res: Response) => {
@@ -15,6 +14,9 @@ export const createOrder = async(req: Request, res: Response) => {
             totalAmount += parseInt(products[i].unit_price);
         }
         if(!user){return res.status(404).json({ message: "User not found"})}
+        if(user.role.role === 'supplier' ){
+            return res.status(401).json({message: "Not authorized"})
+        }
         if(!products.length){ return res.status(404).json({ message: "Product not found"})}
         const orderRepository = await AppDataSource.getRepository(Order)
         const order = new Order()
