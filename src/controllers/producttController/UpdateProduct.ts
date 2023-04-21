@@ -8,12 +8,9 @@ export const updateProduct = async(req: Request, res: Response) => {
         const {name, description, unit_price, stock, available, details, categories } = req.body
         const uniqueProduct = await AppDataSource.getRepository(Product).findOne({
             where: { id: parseInt(id)},
-            relations:[
-                'details',
-                'categories'
-            ]
+            relations:['details', 'categories']
         })
-        if(!uniqueProduct) return res.status(404).json({message: "Product not found"})
+        if(!uniqueProduct){ return res.status(404).json({message: "Product not found"})}
         uniqueProduct.name = name
         uniqueProduct.description = description
         uniqueProduct.unit_price = unit_price
@@ -25,7 +22,6 @@ export const updateProduct = async(req: Request, res: Response) => {
         await AppDataSource.manager.query('DELETE FROM category WHERE productsId IS NULL')
         await AppDataSource.manager.query('DELETE FROM detail WHERE productsId IS NULL')
         return res.sendStatus(200)
-        
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({message: error.message});

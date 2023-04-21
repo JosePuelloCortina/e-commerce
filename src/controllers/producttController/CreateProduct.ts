@@ -23,9 +23,8 @@ export const createProduct = async(req: Request, res: Response) => {
             product.categories = categories
             const createProduct = await productRepository.save(product)
             return res.status(200).json(createProduct)
-        }else{
-            return res.status(500).json({message:"Ya existe este product"})
         }
+        return res.status(500).json({message:"Ya existe este product"})
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({message: error.message});
