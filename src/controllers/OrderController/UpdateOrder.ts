@@ -12,9 +12,7 @@ export const updateOrder = async( req: Request, res: Response) => {
         })
         const products = await AppDataSource.query(`SELECT * FROM product WHERE id IN (${productIds.join(',')})`)
         if(!products.length){
-            return res.status(404).json({
-                message: "Product not found"
-            })
+            return res.status(404).json({ message: "Product not found"})
         } 
         if(!order){
             return res.status(404).json({message: "order not found"})

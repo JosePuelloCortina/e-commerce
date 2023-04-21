@@ -13,7 +13,6 @@ export const getOrderByNumber = async(req: Request, res: Response) => {
             return res.status(404).json({ message: "order not found"})
         }
         return res.status(200).json(order)
-        
     } catch (error) {
         if(error instanceof Error ){
             return res.status(500).json({message: error.message})
