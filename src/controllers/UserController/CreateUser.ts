@@ -34,9 +34,8 @@ export const createUser = async(req: Request, res: Response) => {
             user.profiles = profiles
             const createUser = await userRepository.save(user)           
             return res.status(201).json(createUser);
-        }else{
-            return res.status(500).json({error: "Ya existe un usuario con este correo"})
         }
+        return res.status(500).json({error: "Ya existe un usuario con este correo"})
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({ message: error.message})
