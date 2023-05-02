@@ -9,19 +9,15 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { useAuthStore } from './store/auth'
 
 function App() {
-  
   const isAuth = useAuthStore(state => state.isAuth)
   return (
     <BrowserRouter>
-    <Navigation/>
       <Routes>
-        <Route path='/' element={<HomePage/>}  /> 
+        <Route path='/' element={<><HomePage/> <Navigation/></>}  /> 
         <Route path='/login' element={<LoginPage/>}  /> 
         <Route path='/register' element={<RegisterPage/>}  />  
-
         <Route element={<ProtectedRoute isAllowed={isAuth}/> } >
-          <Route path='/profile' element={<ProfilePage/>}  /> 
-
+          <Route path='/profile' element={<><ProfilePage/><Navigation/></>}  /> 
         </Route>
       </Routes>    
     </BrowserRouter>

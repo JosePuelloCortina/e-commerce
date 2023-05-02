@@ -1,29 +1,29 @@
-import React from 'react'
 import ProductList from '../components/ProductList'
 import Newsletter from '../components/Newsletter'
 import Gallery from '../components/Gallery'
 import Carousel from '../components/Carousel'
 
 
+
 function HomePage() {
 
   const images = [
     {
-      src: '/prueba.png',
+      src: '../images/Banner-003.png',
       alt: 'Random image 1',
     },
     {
-      src: '/prueba.png',
+      src: '../images/Banner-001.png',
       alt: 'Random image 2',
     },
     {
-      src: '/prueba.png',
+      src: '../images/Banner-004.jpg',
       alt: 'Random image 3',
     },
   ];
 
   return (
-    <div className="bg-gray-100 py-0">
+    <div className="bg-gray-100 py-20">
       <div className="mx-auto">
         <Carousel images={images} />
       </div>
