@@ -26,7 +26,8 @@ export const loginHandler = async (req: Request, res:Response) =>
     return res.json({
         token,
         error: null,
-        data: 'exito bienvenido'
+        data: 'exito bienvenido',
+        user
     })
     } catch (error) {
       if(error instanceof Error){

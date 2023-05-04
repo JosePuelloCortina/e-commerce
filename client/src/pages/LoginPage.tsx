@@ -2,25 +2,31 @@ import { loginRequest, userRequest } from "../api/auth"
 import { useAuthStore } from "../store/auth";
 import { useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
+import { useForm, SubmitHandler } from "react-hook-form"
 
+type LoginFormValues = {
+  email: string;
+  password: string;
+}
 
 function LoginPage() {
-
   const navigate = useNavigate()
   const setToken = useAuthStore(state => state.setToken)
   const setUser = useAuthStore(state => state.setUser)
 
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const email = (e.currentTarget.elements[0] as HTMLInputElement).value
-    const password = (e.currentTarget.elements[1] as HTMLInputElement).value
+  const { handleSubmit, register} = useForm<LoginFormValues>();
+
+  const onData = async(data: LoginFormValues) => {
+    const { email, password } = data;
     const resLogin = await loginRequest(email, password)
     setToken(resLogin.data.token)
-    const resUser = await userRequest()
-    console.log(resUser)
+    console.log(resLogin, " login")
+    const resUser = await userRequest(resLogin.data.user.id)
     setUser(resUser.data)
     navigate('/profile') 
-    {<Alert message="Este es un mensaje de éxito" type="green" />}
+  }
+  const onError = async(errors: Record<string, any>) => {
+    console.log(errors.message, " aquiii")
   }
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8" >
@@ -38,7 +44,7 @@ function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onData, onError)}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -46,8 +52,8 @@ function LoginPage() {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
+                  {...register("email")}
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -68,8 +74,8 @@ function LoginPage() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
                   type="password"
+                  {...register("password")}
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
