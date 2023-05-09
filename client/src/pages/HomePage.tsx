@@ -3,8 +3,6 @@ import Newsletter from '../components/Newsletter'
 import Gallery from '../components/Gallery'
 import Carousel from '../components/Carousel'
 
-
-
 function HomePage() {
 
   const images = [

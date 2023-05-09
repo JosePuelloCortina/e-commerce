@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPege'
 import Navigation from './components/Navigation'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { useAuthStore } from './store/auth'
+import ErrorPage from './pages/ErrorPage'
 
 function App() {
   const isAuth = useAuthStore(state => state.isAuth)
@@ -19,6 +20,7 @@ function App() {
         <Route element={<ProtectedRoute isAllowed={isAuth}/> } >
           <Route path='/profile' element={<><ProfilePage/><Navigation/></>}  /> 
         </Route>
+        <Route path='/Error' element={<ErrorPage/>} />
       </Routes>    
     </BrowserRouter>
   )

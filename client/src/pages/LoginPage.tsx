@@ -1,8 +1,10 @@
 import { loginRequest, userRequest } from "../api/auth"
 import { useAuthStore } from "../store/auth";
 import { useNavigate } from "react-router-dom";
-import Alert from "../components/Alert";
 import { useForm, SubmitHandler } from "react-hook-form"
+import Alert from "../components/Alert";
+import { useState, useEffect } from "react";
+
 
 type LoginFormValues = {
   email: string;
@@ -13,21 +15,34 @@ function LoginPage() {
   const navigate = useNavigate()
   const setToken = useAuthStore(state => state.setToken)
   const setUser = useAuthStore(state => state.setUser)
+  const [alert, setAlert] = useState<{ message: string; type: 'green' | 'yellow' | 'red' } | null>(null);
 
   const { handleSubmit, register} = useForm<LoginFormValues>();
 
+  useEffect(() => {
+    if (alert) {
+      const timer = setTimeout(() => {
+        setAlert(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
+
   const onData = async(data: LoginFormValues) => {
-    const { email, password } = data;
-    const resLogin = await loginRequest(email, password)
-    setToken(resLogin.data.token)
-    console.log(resLogin, " login")
-    const resUser = await userRequest(resLogin.data.user.id)
-    setUser(resUser.data)
-    navigate('/profile') 
+    try {
+      const { email, password } = data;
+      const resLogin = await loginRequest(email, password)
+      setToken(resLogin.data.token)
+      const resUser = await userRequest(resLogin.data.user.id)
+      setUser(resUser.data)
+      setTimeout(function(){navigate('/profile')}, 1500)
+    } catch (error) {
+      setAlert({ message: 'El usuario o contraseña son incorrectos', type: 'red' });    
+      setTimeout(function(){navigate('/')},1500)  
+      return error 
+    }
   }
-  const onError = async(errors: Record<string, any>) => {
-    console.log(errors.message, " aquiii")
-  }
+ 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8" >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -44,7 +59,7 @@ function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onData, onError)}>
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit(onData)}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -65,11 +80,6 @@ function LoginPage() {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -81,6 +91,11 @@ function LoginPage() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              <div className="text-sm">
+                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                  </a>
+                </div>
             </div>
             <div>
               <button
@@ -97,7 +112,9 @@ function LoginPage() {
               Registrate
             </a>
           </p>
+          {alert && <Alert message={alert.message} type={alert.type} />}
         </div>
+        
       </div> 
   )
 }
