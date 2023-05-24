@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from "./pages/LoginPage"
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
-import RegisterPage from './pages/RegisterPege'
+import RegisterPage from './pages/RegisterPage'
 import Navigation from './components/Navigation'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { useAuthStore } from './store/auth'

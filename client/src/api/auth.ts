@@ -9,6 +9,16 @@ export const loginRequest = async (email: string, password: string) =>{
 }
 
 export const userRequest = async (id:number) => {
-    console.log( id, 'user request')
     return await axios.get(`/users/${id}`, )
+}
+
+export const registerRequest = async (name:string, last_name:string, phone:string, email:string, password:string, role:number, ) => {
+    return await axios.post('/users/register',{
+        name,
+        last_name,
+        phone,
+        email,
+        password,
+        role
+    })
 }

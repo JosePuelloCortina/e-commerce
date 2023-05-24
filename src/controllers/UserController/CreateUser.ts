@@ -8,7 +8,7 @@ import { validatePassword, validateEmail } from "./Validator";
 export const createUser = async(req: Request, res: Response) => { 
     try { 
         const { name, last_name, email, phone, password, role, address, profiles} = req.body;    
-        if(!name || !last_name || !email || !phone || !password || !role || !address || !profiles){
+        if(!name || !last_name || !email || !phone || !password || !role ){
             return res.status(400).json({error: "Bad request, missing data"})
         }
         const userBody = await User.findOne({
@@ -35,7 +35,7 @@ export const createUser = async(req: Request, res: Response) => {
             const createUser = await userRepository.save(user)           
             return res.status(201).json(createUser);
         }
-        return res.status(500).json({error: "Ya existe un usuario con este correo"})
+        return res.status(500).json({message: "Ya existe un usuario con este correo"})
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({ message: error.message})

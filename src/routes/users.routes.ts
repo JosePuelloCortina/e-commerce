@@ -28,7 +28,7 @@ router.post('/login', loginHandler)
 router.get("/users", requireAuth, allUsers)
 router.get("/users/search", requireAuth, getUserByName)
 router.get("/users/:id", requireAuth, getUser)
-router.post("/users", requireAuth, createUser) 
+router.post("/users/register", createUser) 
 router.put("/users/:id", requireAuth, updateUser)
 router.delete("/users/:id", requireAuth, deleteUser)
 
