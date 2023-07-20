@@ -8,8 +8,6 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
-    BeforeInsert,
-    OneToMany
 } from "typeorm";
 import { User } from "../users/User";
 import { Product } from "../products/Product";
