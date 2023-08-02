@@ -19,14 +19,14 @@ function LoginPage() {
 
   const { handleSubmit, register} = useForm<LoginFormValues>();
 
-  // useEffect(() => {
-  //   if (alert) {
-  //     const timer = setTimeout(() => {
-  //       setAlert(null);
-  //     }, 3500);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [alert]);
+  useEffect(() => {
+    if (alert) {
+      const timer = setTimeout(() => {
+        setAlert(null);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
 
   const onData = async(data: LoginFormValues) => {
     try {

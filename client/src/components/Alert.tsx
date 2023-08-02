@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 type AlertProps = {
   message: string | undefined;
-  type: "green" | "yellow" | "red";
+  type: string;
 };
 
 function Alert({message, type} : AlertProps){
