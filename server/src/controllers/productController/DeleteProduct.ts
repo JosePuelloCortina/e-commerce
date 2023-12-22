@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../../db";
 import { Product } from "../../entities/products/Product";
-import { Detail } from "../../entities/products/Detail";
+import { Detail } from "../../entities/products/ProductDetail";
 import { Category } from "../../entities/products/Category";
 
 export const deleteProduct = async(req: Request, res: Response) => {

@@ -10,7 +10,7 @@ import {
 import { Product } from "./Product";
 
 @Entity()
-export class Detail extends BaseEntity{
+export class ProductDetail extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -48,7 +48,7 @@ export class Detail extends BaseEntity{
     @UpdateDateColumn()
     updated_at: Date
 
-    @ManyToOne( () => Product, product => product.details)
+    @ManyToOne( () => Product, product => product.productDetails)
     products: Product
 
 }

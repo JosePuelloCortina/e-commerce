@@ -7,7 +7,7 @@ import { Product } from "./entities/products/Product";
 import { Order } from "./entities/orders/Order";
 import { Payment } from "./entities/payments/Payment";
 import { Category } from "./entities/products/Category";
-import { Detail } from "./entities/products/Detail";
+import { ProductDetail } from "./entities/products/ProductDetail";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -27,7 +27,7 @@ export const AppDataSource = new DataSource({
         Order,
         Payment,
         Category,
-        Detail
+        ProductDetail
     ],
     // subscribers: [],
     // migrations: [/*...*/],

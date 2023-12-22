@@ -56,7 +56,7 @@ function ProfilePage() {
             <div className='mt-6 ml-6' id="info-container">
               {activeInfo === 'info1' && 
                 <div className="w-ful mr-10">
-                  <PersonalForm/>
+                  <PersonalForm />
                 </div>
               }
               {activeInfo === 'info2' && <div className="info">Información 2</div>}

@@ -11,7 +11,7 @@ import {
 } from "typeorm";
 import { Order } from "../orders/Order";
 import { Category } from "./Category";
-import { Detail } from "./Detail";
+import { ProductDetail } from "./ProductDetail";
 
 @Entity()
 export class Product extends BaseEntity{
@@ -63,6 +63,6 @@ export class Product extends BaseEntity{
     @OneToMany( () => Category, category => category.products, {cascade: true})
     categories: Category[]
 
-    @OneToMany( () => Detail, detail => detail.products, {cascade: true})
-    details: Detail[]
+    @OneToMany( () => ProductDetail, productDetail => productDetail.products, {cascade: true})
+    productDetails: ProductDetail[]
 }
