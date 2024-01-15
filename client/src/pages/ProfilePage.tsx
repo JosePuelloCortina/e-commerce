@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import { useAuthStore } from "../store/auth"
 import PersonalForm from '../components/PersonalForm';
+import ShoppingList from '../components/ShoppingList';
 
 const navigation = [
   { name: 'Datos Personales', info:"info1" },
@@ -60,7 +61,11 @@ function ProfilePage() {
                 </div>
               }
               {activeInfo === 'info2' && <div className="info">Información 2</div>}
-              {activeInfo === 'info3' && <div className="info">Información 3</div>}
+              
+              {activeInfo === 'info3' &&
+                <div className="w-full mr-10">
+                  <ShoppingList/>
+                </div>}
               {activeInfo === 'info4' && <div className="info">Información 4</div>}
               {activeInfo === 'info5' && <div className="info">Información 5</div>}
             </div>

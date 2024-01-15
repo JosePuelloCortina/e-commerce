@@ -1,30 +1,7 @@
-import React from 'react'
 import { useAuthStore } from "../store/auth"
 
-// type User = {
-//   name: string;
-//   last_name: string;
-//   email: string;
-//   phone: string;
-//   active: boolean;
-//   address : {
-//     country: string;
-//     direction: string;
-//     city: string;
-//     postal_code: string;
-
-//   }
-// }
-
-// type UserProps = {
-//   user: User;
-// }
-
-
 function PersonalForm() {
-
   const user = useAuthStore(state => state.user)
-
   return (
     <>
     <form>
