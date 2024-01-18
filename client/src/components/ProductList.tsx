@@ -1,80 +1,25 @@
-import React from 'react'; 
+import React, { useEffect } from 'react';
+import { useProductsStore } from '../store/products';
+import { productsRequest } from '../api/products';
 
 function ProductList() {
-    const products = [
-        {
-          id: 1,
-          name: 'Basic Tee',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-          imageAlt: "Front of men's Basic Tee in black.",
-          price: '$35',
-          color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-          },
-          {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-          },
-          {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-          },
-          {
-              id: 1,
-              name: 'Basic Tee',
-              href: '#',
-              imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-              imageAlt: "Front of men's Basic Tee in black.",
-              price: '$35',
-              color: 'Black',
-            },
-            {
-              id: 1,
-              name: 'Basic Tee',
-              href: '#',
-              imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-              imageAlt: "Front of men's Basic Tee in black.",
-              price: '$35',
-              color: 'Black',
-            },
-            {
-              id: 1,
-              name: 'Basic Tee',
-              href: '#',
-              imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-              imageAlt: "Front of men's Basic Tee in black.",
-              price: '$35',
-              color: 'Black',
-            },
-            {
-              id: 1,
-              name: 'Basic Tee',
-              href: '#',
-              imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-              imageAlt: "Front of men's Basic Tee in black.",
-              price: '$35',
-              color: 'Black',
-            }
-      ]
+  
+  const setProducts = useProductsStore((state) => state.setProducts);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await productsRequest();
+        const products = response.data;
+        setProducts(products);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchData();
+  }, [setProducts]);
+  const products = useProductsStore(state => state.products)
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -99,7 +44,7 @@ function ProductList() {
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                <p className="text-sm font-medium text-gray-900">{product.unit_price}</p>
               </div>
             </div>
           ))}

@@ -33,7 +33,7 @@ router.put("/users/:id", requireAuth, updateUser)
 router.delete("/users/:id", requireAuth, deleteUser)
 
 //Rutas products
-router.get("/products/", requireAuth, allProducts)
+router.get("/products/", allProducts)
 router.get("/products/search", requireAuth, getProductByName)
 router.get("/products/:id", requireAuth, getProduct)
 router.post("/products/:userId", requireAuth, createProduct) 
