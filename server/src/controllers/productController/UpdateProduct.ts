@@ -20,7 +20,7 @@ export const updateProduct = async(req: Request, res: Response) => {
         uniqueProduct.categories = categories
         await uniqueProduct.save()
         await AppDataSource.manager.query('DELETE FROM category WHERE productsId IS NULL')
-        await AppDataSource.manager.query('DELETE FROM detail WHERE productsId IS NULL')
+        await AppDataSource.manager.query('DELETE FROM product_detail WHERE productsId IS NULL')
         return res.sendStatus(200)
     } catch (error) {
         if(error instanceof Error){
