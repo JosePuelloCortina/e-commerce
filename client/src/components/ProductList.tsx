@@ -22,7 +22,7 @@ function ProductList() {
     }, []);
 
   const products = useProductsStore(state => state.products)
-  console.log(products, " acaa")
+  console.log(products[5].productDetails, " acaa")
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -32,7 +32,7 @@ function ProductList() {
             <div key={product.id} className="group relative">
               <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
-                  src={product.name}
+                  src={product.productDetails[0].images}
                   alt={product.name}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
@@ -42,18 +42,13 @@ function ProductList() {
                   <h3 className="text-sm text-gray-700">
                     <a href={product.name}>
                       <span aria-hidden="true" className="absolute inset-0" />
-                      {product.name}
+                      {/* {product.name} */}
                     </a>
                   </h3>
-                  
-                  {
-                    
-                    product.productDetails
-                      ?<p className="mt-1 text-sm text-gray-500">{product.code}</p>
-                      :<p className="mt-1 text-sm text-gray-500">{product.productDetails}</p>
-                  }
+                    {/* <p className="mt-1 text-sm text-gray-500">{product.code}</p> */}
+                    <p className="mt-1 text-sm text-gray-500">{product.productDetails[0].color}</p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">{product.unit_price}</p>
+                <p className="text-sm font-medium text-gray-900">$ {product.unit_price}</p>
               </div>
             </div>
           ))}

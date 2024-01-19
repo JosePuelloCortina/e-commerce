@@ -11,7 +11,8 @@ interface Product{
     available: number;
     created_at: Date;
     updated_at: Date;
-    productDetails: []
+    productDetails: [];
+    categories: [];
 }
 
 type State = {
@@ -26,17 +27,14 @@ export const useProductsStore = create(persist <State & Actions>(
     (set) => ({
         products: [],
         setProducts: (products: Product[]) => {
-            const currentProductsJSON = JSON.stringify(products);
-            const newProductsJSON = JSON.stringify(products);
-          
-            if (currentProductsJSON !== newProductsJSON) {
+
               set((state) => ({
                 ...state,
                 products,
               }));
-            }
           }
     }),{
-        name: 'products'
+        name: 'products',
+        getStorage: () => localStorage,
     }
 ))
