@@ -29,7 +29,7 @@ export const createProduct = async(req: Request, res: Response) => {
             product.description = description
             product.unit_price = unit_price
             product.stock = stock
-            product.details = details
+            product.productDetails = details
             product.categories = categories
             const createProduct = await productRepository.save(product)
             return res.status(200).json(createProduct)

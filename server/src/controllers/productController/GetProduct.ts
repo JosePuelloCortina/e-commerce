@@ -7,7 +7,7 @@ export const getProduct = async(req: Request, res: Response) => {
         const { id} = req.params
         const product = await AppDataSource.getRepository(Product).findOne({
             where: { id: parseInt(id)},
-            relations: ['categories', 'details']
+            relations: ['categories', 'productDetails']
         })
         if(!product?.available){
             return res.status(404).json({message: "Noy existe este product"})

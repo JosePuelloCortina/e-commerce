@@ -5,7 +5,7 @@ import { AppDataSource } from "../../db";
 export const allProducts = async ( req: Request, res: Response) =>{
     try {
         const products = await AppDataSource.getRepository(Product).find({
-            relations:['categories']
+            relations:['categories', 'productDetails']
         })
         if(!products.length){
             return res.status(200).json({message:"No se encontraron productos"})
