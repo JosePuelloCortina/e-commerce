@@ -4,7 +4,15 @@ import { persist } from "zustand/middleware";
 
 interface Product{
     id: number;
+    code: number;
     name: string;
+    description: string;
+    unit_price: number;
+    stock: number;
+    available: number;
+    created_at: Date;
+    updated_at: Date;
+    productDetails: []
 }
 
 type State = {
