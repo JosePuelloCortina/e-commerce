@@ -4,6 +4,7 @@ import ProductDetails from "./Productdetail";
 const Gallery = ({ images, details }:any) => {
   const callouts = [
     {
+      key: 1,
       name: 'Desk and Office',
       description: 'Work from home accessories',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
@@ -11,6 +12,7 @@ const Gallery = ({ images, details }:any) => {
       href: '#',
     },
     {
+      key: 2,
       name: 'Self-Improvement',
       description: 'Journals and note-taking',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
@@ -18,6 +20,7 @@ const Gallery = ({ images, details }:any) => {
       href: '#',
     },
     {
+      key: 3,
       name: 'Travel',
       description: 'Daily commute essentials',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
@@ -25,6 +28,7 @@ const Gallery = ({ images, details }:any) => {
       href: '#',
     },
     {
+      key: 4,
       name: 'Desk and Office',
       description: 'Work from home accessories',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
@@ -32,6 +36,7 @@ const Gallery = ({ images, details }:any) => {
       href: '#',
     },
     {
+      key: 5,
       name: 'Self-Improvement',
       description: 'Journals and note-taking',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
@@ -39,6 +44,7 @@ const Gallery = ({ images, details }:any) => {
       href: '#',
     },
     {
+      key: 6,
       name: 'Travel',
       description: 'Daily commute essentials',
       imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
@@ -56,7 +62,7 @@ const Gallery = ({ images, details }:any) => {
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
             {callouts.map((callout) => (
-              <div key={callout.name} className="group relative">
+              <div key={callout.key} className="group relative">
                 <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
                   <img
                     src={callout.imageSrc}

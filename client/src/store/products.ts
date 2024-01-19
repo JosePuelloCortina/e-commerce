@@ -1,4 +1,3 @@
-import { set } from "react-hook-form";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -26,13 +25,18 @@ type Actions = {
 export const useProductsStore = create(persist <State & Actions>(
     (set) => ({
         products: [],
-        setProducts: (products: Product[]) => 
-            set( state => ({
+        setProducts: (products: Product[]) => {
+            const currentProductsJSON = JSON.stringify(products);
+            const newProductsJSON = JSON.stringify(products);
+          
+            if (currentProductsJSON !== newProductsJSON) {
+              set((state) => ({
                 ...state,
                 products,
-            }))
+              }));
+            }
+          }
     }),{
-        name: 'products',
-        getStorage: () => localStorage
+        name: 'products'
     }
 ))

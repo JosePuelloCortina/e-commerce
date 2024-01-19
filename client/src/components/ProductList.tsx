@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useProductsStore } from '../store/products';
 import { productsRequest } from '../api/products';
 
@@ -6,8 +6,8 @@ function ProductList() {
   
   const setProducts = useProductsStore((state) => state.setProducts);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  
+    const fetchData = useCallback( async () => {
       try {
         const response = await productsRequest();
         const products = response.data;
@@ -15,11 +15,14 @@ function ProductList() {
       } catch (error) {
         console.error('Error fetching products:', error);
       }
-    };
+    }, [setProducts]);
+     
+    useEffect(() => {
+      fetchData();
+    }, []);
 
-    fetchData();
-  }, [setProducts]);
   const products = useProductsStore(state => state.products)
+  console.log(products, " acaa")
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -42,7 +45,13 @@ function ProductList() {
                       {product.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                  
+                  {
+                    
+                    product.productDetails
+                      ?<p className="mt-1 text-sm text-gray-500">{product.code}</p>
+                      :<p className="mt-1 text-sm text-gray-500">{product.productDetails}</p>
+                  }
                 </div>
                 <p className="text-sm font-medium text-gray-900">{product.unit_price}</p>
               </div>

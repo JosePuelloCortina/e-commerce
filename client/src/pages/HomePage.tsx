@@ -1,11 +1,12 @@
 import ProductList from '../components/ProductList'
 import Gallery from '../components/Gallery'
 import Carousel from '../components/Carousel'
+import { useMemo } from 'react';
 
 
 function HomePage() {
 
-  const images = [
+  const images = useMemo(() => [
     {
       src: '../images/Banner-003.png',
       alt: 'Random image 1',
@@ -18,7 +19,7 @@ function HomePage() {
       src: '../images/Banner-004.jpg',
       alt: 'Random image 3',
     },
-  ];
+  ], []);
 
   return (
     <>
