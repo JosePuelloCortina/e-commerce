@@ -42,10 +42,10 @@ function ProductList() {
                   <h3 className="text-sm text-gray-700">
                     <a href={product.name}>
                       <span aria-hidden="true" className="absolute inset-0" />
-                      {/* {product.name} */}
+                      {product.name}
                     </a>
                   </h3>
-                    {/* <p className="mt-1 text-sm text-gray-500">{product.code}</p> */}
+                    <p className="mt-1 text-sm text-gray-500">{product.code}</p> 
                     <p className="mt-1 text-sm text-gray-500">{product.productDetails[0].color}</p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">$ {product.unit_price}</p>
