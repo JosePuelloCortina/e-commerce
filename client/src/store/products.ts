@@ -11,7 +11,7 @@ interface Product{
     available: number;
     created_at: Date;
     updated_at: Date;
-    productDetails: [];
+    productDetails: any;
     categories: [];
 }
 
