@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { Role } from "../entities/users/Role";
+import { Role } from "../../entities/users/Role";
 
 const roles = [
     {

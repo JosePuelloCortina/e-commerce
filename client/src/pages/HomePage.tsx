@@ -38,7 +38,7 @@ function HomePage() {
                 Ofrecemos una gran variedad de productos <b>eco friendly</b> de alta calidad
               </p>
               <div className="mt-8">
-                <ProductList />
+                {/* <ProductList /> */}
                 
                 <Gallery/>
               </div>
