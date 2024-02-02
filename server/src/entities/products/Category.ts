@@ -30,7 +30,4 @@ export class Category extends BaseEntity {
 
     @UpdateDateColumn()
     updated_at: Date
-
-    @ManyToOne( () => Product, product => product.categories)
-    products: Product
 }

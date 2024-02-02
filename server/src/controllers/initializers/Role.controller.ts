@@ -1,19 +1,5 @@
 import { Role } from "../../entities/users/Role";
-
-const roles = [
-    {
-        "id": 1,
-        "role": "admin",
-    },
-    {
-        "id": 2,
-        "role": "buyer"
-    },
-    {
-        "id": 3,
-        "role": "supplier"
-    }
-]
+import { roles } from "../../utils/data/roles";
  
 export const initializeRole = async() => {
     try {       
