@@ -13,6 +13,7 @@ import { Role } from './Role';
 import { Profile } from './Profile';
 import { Address } from './Address';
 import { Order } from '../orders/Order';
+import { Product } from '../products/Product';
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -58,6 +59,9 @@ export class User extends BaseEntity {
 
     @ManyToOne(() => Role, (role) => role.users)
     role: Role
+
+    @OneToMany(() => Product, (product) => product.user)
+    products: Product[]
 
     @OneToMany(() => Profile, (profile) => profile.user, {cascade: true})
     profiles: Profile[]

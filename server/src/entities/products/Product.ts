@@ -6,12 +6,14 @@ import {
     BaseEntity,
     PrimaryGeneratedColumn,
     ManyToMany,
-    OneToMany
+    OneToMany,
+    ManyToOne
 
 } from "typeorm";
 import { Order } from "../orders/Order";
 import { Category } from "./Category";
 import { ProductDetail } from "./ProductDetail";
+import { User } from "../users/User";
 
 @Entity()
 export class Product extends BaseEntity{
@@ -57,11 +59,14 @@ export class Product extends BaseEntity{
     @UpdateDateColumn()
     updated_at: Date
 
+    @ManyToOne(() => User, (user) => user.products)
+    user: User
+
+    @ManyToOne(() => Category, (category) => category.products) 
+    category: Category[]
+    
     @ManyToMany(() => Order, order => order.products)
     orders: Order[]
-
-    @OneToMany( () => Category, category => category.products, {cascade: true})
-    categories: Category[]
 
     @OneToMany( () => ProductDetail, productDetail => productDetail.products, {cascade: true})
     productDetails: ProductDetail[]
