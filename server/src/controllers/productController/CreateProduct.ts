@@ -6,7 +6,7 @@ import { User } from "../../entities/users/User";
 export const createProduct = async(req: Request, res: Response) => {
     try {
         const { userId } = req.params
-        const {code, name, description, unit_price, stock, details, category } = req.body
+        const {code, name, description, unit_price, stock, details, category, user} = req.body
         if(!code || !name || !description || !unit_price || !stock || !details || !category){
             return res.status(400).json({message: "Bad request, missing data"})
         }
@@ -21,9 +21,9 @@ export const createProduct = async(req: Request, res: Response) => {
         const uniqueProduct = await AppDataSource.getRepository(Product).findOne({
             where: { code: req.body.code}
         })
-        
+        const idUser = userPermissions.id;
         if(!uniqueProduct){
-            const productRepository = await AppDataSource.getRepository(Product)
+            const productRepository = AppDataSource.getRepository(Product)
             const product = new Product()
             product.code = code
             product.name = name
@@ -32,7 +32,7 @@ export const createProduct = async(req: Request, res: Response) => {
             product.stock = stock
             product.productDetails = details
             product.category = category
-            product.user = userPermissions
+            product.user = user
             const createProduct = await productRepository.save(product)
             return res.status(200).json(createProduct)
         }

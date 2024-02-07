@@ -63,7 +63,7 @@ export class Product extends BaseEntity{
     user: User
 
     @ManyToOne(() => Category, (category) => category.products) 
-    category: Category[]
+    category: Category
     
     @ManyToMany(() => Order, order => order.products)
     orders: Order[]
