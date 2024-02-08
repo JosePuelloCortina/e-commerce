@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../../db";
 import { Product } from "../../entities/products/Product";
 import { User } from "../../entities/users/User";
+import { Category } from "../../entities/products/Category";
 
 export const createProduct = async(req: Request, res: Response) => {
     try {
@@ -10,6 +11,10 @@ export const createProduct = async(req: Request, res: Response) => {
         if(!code || !name || !description || !unit_price || !stock || !details || !category){
             return res.status(400).json({message: "Bad request, missing data"})
         }
+        const categoryExists = await Category.findOne({
+            where: { id: category}
+        })
+        if(!categoryExists){return res.status(404).json({message: "category not found"})}
         const userPermissions = await User.findOne({
             where: { id: parseInt(userId)},
             relations: ['role']
@@ -21,7 +26,6 @@ export const createProduct = async(req: Request, res: Response) => {
         const uniqueProduct = await AppDataSource.getRepository(Product).findOne({
             where: { code: req.body.code}
         })
-        const idUser = userPermissions.id;
         if(!uniqueProduct){
             const productRepository = AppDataSource.getRepository(Product)
             const product = new Product()
@@ -30,7 +34,7 @@ export const createProduct = async(req: Request, res: Response) => {
             product.description = description
             product.unit_price = unit_price
             product.stock = stock
-            product.productDetails = details
+            product.productDetails = details 
             product.category = category
             product.user = user
             const createProduct = await productRepository.save(product)

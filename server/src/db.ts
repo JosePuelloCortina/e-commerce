@@ -17,7 +17,7 @@ export const AppDataSource = new DataSource({
     password: "admin321",
     database: "ecommerce", 
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [
         User,
         Role,
