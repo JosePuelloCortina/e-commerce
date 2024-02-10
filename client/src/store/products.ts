@@ -12,7 +12,7 @@ interface Product{
     created_at: Date;
     updated_at: Date;
     productDetails: any;
-    categories: [];
+    category: [];
 }
 
 type State = {
@@ -27,7 +27,6 @@ export const useProductsStore = create(persist <State & Actions>(
     (set) => ({
         products: [],
         setProducts: (products: Product[]) => {
-
               set((state) => ({
                 ...state,
                 products,
@@ -35,6 +34,6 @@ export const useProductsStore = create(persist <State & Actions>(
           }
     }),{
         name: 'products',
-        getStorage: () => localStorage,
+        
     }
 ))

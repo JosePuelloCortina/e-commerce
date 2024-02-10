@@ -9,7 +9,7 @@ export const products = [
         "productDetail": [
             {
               "id": 1,
-              "images": "image/lapiz.jpg",
+              "images": "https://media.istockphoto.com/id/1454211695/es/foto/l%C3%A1piz-de-madera.jpg?s=612x612&w=0&k=20&c=PUfcBIuMEOH2AhO0ChOTQ2tnTfQZfpf7bZxfFlfQBa8=",
               "color": "negro",
               "size":12,
               "model": "lp1232",
@@ -29,7 +29,7 @@ export const products = [
         "productDetail": [
             {
               "id": 2,
-              "images": "image/borrador.jpg",
+              "images": "https://images.pexels.com/photos/35202/eraser-office-supplies-office-office-accessories.jpg?auto=compress&cs=tinysrgb&w=600",
               "color": "blanco",
               "size":12,
               "model": "br1232",
@@ -49,7 +49,7 @@ export const products = [
         "productDetail": [
           {
             "id": 3,
-            "images": "image/bolso",
+            "images": "https://images.pexels.com/photos/2081199/pexels-photo-2081199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "color": "azul",
             "size":12,
             "model": "bol1232",
