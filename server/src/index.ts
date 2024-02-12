@@ -20,7 +20,7 @@ async function main(){
     await productInitialeze();
     console.log("Products are created")
     await orderInitialize();
-    console.log("Order are created ")
+    console.log("Order are created")
     app.listen(3000)
     console.log("server listening on port", 3000)
    } catch (error) {
