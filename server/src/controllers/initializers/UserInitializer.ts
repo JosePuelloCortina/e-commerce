@@ -1,6 +1,4 @@
-
 import { AppDataSource } from "../../db";
-import { Role } from "../../entities/users/Role";
 import { User } from "../../entities/users/User";
 import bcrypt  from "bcryptjs";
 import { users } from "../../utils/data/user";
@@ -36,9 +34,7 @@ export const userInitialize = async() =>{
                 await createdUser.save();
                 const createdAddress = await Address.create(addressData)
                 await createdAddress.save();
-            } 
-            
-            
+            }             
         }
     } catch (error) {
         if(error instanceof Error){
