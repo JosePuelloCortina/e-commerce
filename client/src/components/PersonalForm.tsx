@@ -2,6 +2,9 @@ import { useAuthStore } from "../store/auth"
 
 function PersonalForm() {
   const user = useAuthStore(state => state.user)
+  if(user.address.lenght > 0){
+
+  }
   return (
     <>
     <form>
@@ -64,7 +67,7 @@ function PersonalForm() {
                   type="text"
                   name="country"
                   id="country"
-                  defaultValue={user.address[0].country}
+                  defaultValue={user.name}
                   autoComplete="country"
                   className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -74,16 +77,19 @@ function PersonalForm() {
               <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
                 Street address
               </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="street-address"
-                  id="street-address"
-                  defaultValue={user.address[0].direction}
-                  autoComplete="street-address"
-                  className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              {user.address.lenght == 0 ? (
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    name="street-address"
+                    id="street-address"
+                    defaultValue={user.address[0].direction}
+                    autoComplete="street-address"
+                    className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              ): null
+              }
             </div>
             <div className="sm:col-span-1">
               <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
@@ -94,7 +100,7 @@ function PersonalForm() {
                   type="text"
                   name="city"
                   id="city"
-                  defaultValue={user.address[0].city}
+                  defaultValue={user.name}
                   autoComplete="address-level2"
                   className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -109,7 +115,7 @@ function PersonalForm() {
                   type="text"
                   name="postal-code"
                   id="postal-code"
-                  defaultValue={user.address[0].postal_code}
+                  defaultValue={user.last_name}
                   autoComplete="postal-code"
                   className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
